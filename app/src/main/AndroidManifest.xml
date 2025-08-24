@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Разрешения (можно оставить их в манифесте или добавить в manifest.xml с <uses-permission>) -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CurierApp"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.yandex.maps.apikey"
+            android:value="0e45506f-71a8-4431-8d43-cc279925b01f"/>
+
+
         <activity
             android:name=".SettingsActivity"
             android:exported="false" />

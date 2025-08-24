@@ -71,7 +71,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressViewHolder> 
 
         //Галочка "выполнено"
         if (list.get(position).isChecked()) {
-            holder.imageCheck.setImageResource(R.drawable.outline_check_box_24);
+            holder.imageCheck.setImageResource(R.drawable.checkbox);
         } else {
             holder.imageCheck.setImageResource(0); //Если адрес помечен как "checked", то показываем иконку галочки.
         }
@@ -149,10 +149,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressViewHolder> 
             this.list = newList;
             notifyDataSetChanged();
         }
-
     }
-
-
 
 //мини-контейнер, который держит ссылки на все элементы в твоей заметке (TextView, ImageView, и т.д.)
 class AddressViewHolder extends RecyclerView.ViewHolder {
@@ -176,5 +173,4 @@ class AddressViewHolder extends RecyclerView.ViewHolder {
         textDate = itemView.findViewById(R.id.text_date);
         imageCheck = itemView.findViewById(R.id.image_check);
     }
-
 }

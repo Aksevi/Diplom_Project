@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     RoomDB dataBase; // объект базы данных ROOM
     private List<Address> addressList = new ArrayList<>(); // список адресов, который мы получаем из базы.
 
-//    Address selectedAddress; // переменная выбранного адреса
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +126,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 102) { //Для редактирования (requestCode == 102):
             if (resultCode == MainActivity.RESULT_OK) {
                 Address newAddress = (Address) data.getSerializableExtra("address"); // Из Intent забираем объект Notes, который мы передавали из другой Activity.
-                dataBase.mainDAO().update(newAddress.getAddress(), newAddress.getPhone(), newAddress.getComment(), newAddress.getDate(), newAddress.isChecked(), newAddress.getId()); //Обновляем существующую запись в базе по ID.
+//                dataBase.mainDAO().update(newAddress.getAddress(), newAddress.getPhone(), newAddress.getComment(), newAddress.getDate(), newAddress.isChecked(), newAddress.getId()); //Обновляем существующую запись в базе по ID.
+                dataBase.mainDAO().update(newAddress);
                 //Обновление списка на экране
                 addressList.clear();
                 addressList.addAll(dataBase.mainDAO().getAll());
