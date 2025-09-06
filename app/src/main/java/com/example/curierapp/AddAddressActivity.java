@@ -28,8 +28,6 @@ import java.util.Locale;
 
 public class AddAddressActivity extends AppCompatActivity {
 
-//    Button addAddressButton, cancelButton;
-
     EditText editTextAddress, editTextPhone, editTextComment; //поля ввода адреса, телефона, комментария
     ImageView imageViewSave; //иконка для кнопки "Сохранить".
     //    RoomDB db; //объект базы данных.
@@ -72,8 +70,8 @@ public class AddAddressActivity extends AppCompatActivity {
                 String phoneText = editTextPhone.getText().toString().trim();
                 String commentText = editTextComment.getText().toString().trim();
 
-                if (addressText.isEmpty() || phoneText.isEmpty()) { //Проверка заполненности
-                    Toast.makeText(AddAddressActivity.this, "Enter address or Phone", Toast.LENGTH_SHORT).show();
+                if (addressText.isEmpty()) { //Проверка заполненности
+                    Toast.makeText(AddAddressActivity.this, "Enter address", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");

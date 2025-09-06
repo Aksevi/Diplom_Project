@@ -21,6 +21,7 @@ import com.example.curierapp.Models.Address;
 import com.example.curierapp.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -34,21 +35,58 @@ import java.util.Random;
 // Этот класс расширяет RecyclerView.Adapter и указывает, что будет использовать кастомный ViewHolder — NotesViewHolder.
 public class AddressListAdapter extends RecyclerView.Adapter<AddressViewHolder> {
 
+
     // 2️⃣ Переменные и конструктор
     Context context; // Контекст, нужен для доступа к ресурсам, разметке и т.д.
     List<Address> list; // список адресов
     AddressClickListener listener; // Интерфейс — слушатель нажатий
+
 
     // конструктор (alt+ins)
     public AddressListAdapter(Context context, List<Address> list, AddressClickListener listener) {
         this.context = context;
         this.list = list;
         this.listener = listener;
+
     }
+
+    @Override
+    public long getItemId(int position) {
+        return list.get(position).getId(); // возвращаем уникальный id
+    }
+
 
     public List<Address> getList() {
         return list;
     }
+
+    // метод для перетаскивания  - не работает
+    public void moveItem(int fromPos, int toPos) {
+        if (fromPos < 0 || toPos < 0 || fromPos >= list.size() || toPos >= list.size()) return;
+
+        if (fromPos < toPos) {
+            for (int i = fromPos; i < toPos; i++) {
+                Collections.swap(list, i, i + 1);
+            }
+        } else {
+            for (int i = fromPos; i > toPos; i--) {
+                Collections.swap(list, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPos, toPos);
+
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setPosition(i);
+        }
+        // сохраняем новые позиции в базе
+        new Thread(() -> {
+            RoomDB db = RoomDB.getInstance(context);
+            for (Address a : list) {
+                db.mainDAO().update(a);
+            }
+        }).start();
+    }
+
 
     //3️⃣ Создание карточки
     @NonNull
@@ -60,6 +98,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressViewHolder> 
     //4️⃣ Заполнение карточки данными. На этом шаге мы берём данные из list.get(position) и вставляем их в соответствующие элементы карточки.
     @Override
     public void onBindViewHolder(@NonNull AddressViewHolder holder, int position) {
+
 
         //Устанавливаем заголовок, текст и дату:
         holder.textAddress.setSelected(true);
@@ -79,6 +118,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressViewHolder> 
         int colorCode = getRandomColor(); // getRandomColor() метод выбора случайного цвета (сделали его ниже). colorCode - переменная куда будем этот цвет класть
         holder.addressContainer.setCardBackgroundColor(holder.itemView.getResources().getColor(colorCode, null));
 
+
         //5️⃣ Обработка кликов
         // Клик по карточке
         holder.addressContainer.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +132,8 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressViewHolder> 
             @Override
             public boolean onLongClick(View v) {
                 listener.onLongClick(list.get(holder.getAdapterPosition()), holder.addressContainer);
-                return true;
+
+                return false;
             }
         });
 
@@ -112,6 +153,19 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressViewHolder> 
     public Context getContext() {
         return context;
     }
+
+    public void updatePositionsInDB() {
+        RoomDB db = RoomDB.getInstance(getContext());
+        new Thread(() -> {
+            List<Address> currentList = getList();
+            for (int i = 0; i < currentList.size(); i++) {
+                Address a = currentList.get(i);
+                a.setPosition(i);   // обновляем поле позиции
+                db.mainDAO().update(a); // пишем в базу
+            }
+        }).start();
+    }
+
 
 
     // 6️⃣ Метод выбора случайного цвета
@@ -146,10 +200,10 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressViewHolder> 
     }
 
     public void setList(List<Address> newList) { //setList(List<Address> newList) — обновляет список и перерисовывает все карточки (notifyDataSetChanged()).
-            this.list = newList;
-            notifyDataSetChanged();
-        }
+        this.list = newList;
+        notifyDataSetChanged();
     }
+}
 
 //мини-контейнер, который держит ссылки на все элементы в твоей заметке (TextView, ImageView, и т.д.)
 class AddressViewHolder extends RecyclerView.ViewHolder {
@@ -162,7 +216,6 @@ class AddressViewHolder extends RecyclerView.ViewHolder {
     TextView textDate;
     ImageView imageCheck;
 
-
     public AddressViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -174,3 +227,8 @@ class AddressViewHolder extends RecyclerView.ViewHolder {
         imageCheck = itemView.findViewById(R.id.image_check);
     }
 }
+
+
+
+
+

@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/black">
 
     <!-- Заголовок -->
     <TextView
@@ -14,68 +15,72 @@
         android:text="Статистика"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        />
 
     <!-- Всего адресов -->
     <TextView
-        android:id="@+id/text_Total"
+        android:id="@+id/text_total"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Всего адресов: "
         android:textSize="18sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/text_Title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="24dp"
+        />
 
     <!-- Выполнено -->
     <TextView
-        android:id="@+id/text_Completed"
+        android:id="@+id/text_completed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Выполнено: "
         android:textSize="18sp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/text_Total"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/text_total"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        />
 
     <!-- Осталось -->
     <TextView
-        android:id="@+id/text_Remaining"
+        android:id="@+id/text_remaining"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Осталось: "
         android:textSize="18sp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/text_Completed"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/text_completed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        />
 
     <!-- Прогресс бар -->
     <ProgressBar
-        android:id="@+id/progress_Bar"
+        android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:progress="50"
         android:max="100"
         android:progressTint="@color/green"
-        app:layout_constraintTop_toBottomOf="@id/text_Remaining"
+        app:layout_constraintTop_toBottomOf="@id/text_remaining"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"/>
 
     <!-- Кнопка назад -->
     <Button
-        android:id="@+id/btn_Back"
+        android:id="@+id/btn_back"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Назад"

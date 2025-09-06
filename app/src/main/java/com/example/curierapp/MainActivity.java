@@ -1,5 +1,6 @@
 package com.example.curierapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,11 +35,10 @@ public class MainActivity extends AppCompatActivity {
     Button btnMap;
     Button btnStatistics;
 
+
     private AddressListAdapter addressListAdapter; //адаптер, который будет соединять список данных и RecyclerView.
     RoomDB dataBase; // объект базы данных ROOM
     private List<Address> addressList = new ArrayList<>(); // список адресов, который мы получаем из базы.
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +54,14 @@ public class MainActivity extends AppCompatActivity {
         dataBase = RoomDB.getInstance(this); //Подключаемся к базе данных.
         addressList = dataBase.mainDAO().getAll(); //Загружаем все адреса из базы.
 
-        updateRecycler(addressList); // Обновляем список на экране с помощью метода updateRecycler (рассмотрим ниже).
 
         // Создаём адаптер и передаём:
         addressListAdapter = new AddressListAdapter(MainActivity.this, addressList, addressClickListener); //контекст (MainActivity.this), слушатель кликов (addressClickListener), список (addressList)
-        addressRecyclerView.setAdapter(addressListAdapter); //Устанавливаем адаптер в список.*/
+
+        addressRecyclerView.setAdapter(addressListAdapter); //Устанавливаем адаптер в список.
+
+        updateRecycler(addressList); // Обновляем список на экране с помощью метода updateRecycler ( ниже).
+
 
         // Подключаем TouchHelper после того, как адаптер создан. TouchHelper — отдельный класс, который обрабатывает свайпы.
         //Swipe-события - Подключается помощник свайпа — можно тянуть задачи влево/вправо  для удаления или редактирования. сами свайпы у нас реализованы в RecycletViewTouchHelper.java
@@ -111,11 +114,13 @@ public class MainActivity extends AppCompatActivity {
     //метод для обновления элементов
     private void updateRecycler(List<Address> address) {
         addressRecyclerView.setHasFixedSize(true); // фиксируем размер элемента. setHasFixedSize(true) — ускоряет работу списка, если размеры элементов не меняются.
-        addressRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)); // setLayoutManager(...) — говорит, как отображать элементы: StaggeredGridLayoutManager — отображает заметки в виде плиток, как Pinterest. 2 — это две колонки.
-//        addressRecyclerView.setLayoutManager(new LinearLayoutManager(this)); // new LinearLayoutManager(this) — говорит, как отображать элементы: здесь будет на всю ширину одна под другой
+//        addressRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)); // setLayoutManager(...) — говорит, как отображать элементы: StaggeredGridLayoutManager — отображает заметки в виде плиток, как Pinterest. 2 — это две колонки.
 
-        addressListAdapter = new AddressListAdapter(MainActivity.this, address, addressClickListener); //Создаём адаптер notesListAdapter, который отображает каждую заметку. addressClickListener - это будет красным поэтому выше создали экземпляр интерфейса
-        addressRecyclerView.setAdapter(addressListAdapter); //Устанавливаем его (адаптер) в addressRecyclerView.  addressRecyclerView это мой RecyclerView из activity_main.xml
+        addressRecyclerView.setLayoutManager(new LinearLayoutManager(this)); // new LinearLayoutManager(this) — говорит, как отображать элементы: здесь будет на всю ширину одна под другой
+
+//        addressListAdapter = new AddressListAdapter(MainActivity.this, address, addressClickListener); //Создаём адаптер notesListAdapter, который отображает каждую заметку. addressClickListener - это будет красным поэтому выше создали экземпляр интерфейса
+//        addressRecyclerView.setAdapter(addressListAdapter); //Устанавливаем его (адаптер) в addressRecyclerView.  addressRecyclerView это мой RecyclerView из activity_main.xml
+        addressListAdapter.setList(address);
     }
 
     @Override
@@ -130,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
                 dataBase.mainDAO().update(newAddress);
                 //Обновление списка на экране
                 addressList.clear();
-                addressList.addAll(dataBase.mainDAO().getAll());
+                addressList.addAll(dataBase.mainDAO().getAllSorted());
+
                 addressListAdapter.notifyDataSetChanged();
 
             }
@@ -143,37 +149,12 @@ public class MainActivity extends AppCompatActivity {
                 // Обновление списка на экране
                 addressList.clear();
                 addressList.addAll(dataBase.mainDAO().getAll());
+
                 addressListAdapter.notifyDataSetChanged();
             }
         }
     }
-    // Возврат из AddAddressActivity 2 ВАРИАНТ
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (resultCode == RESULT_OK && data != null) {
-//            Address newAddress = (Address) data.getSerializableExtra("address");
-//
-//            if (requestCode == 101) {
-//                // Добавление нового
-//                dataBase.mainDAO().insert(newAddress);
-//            } else if (requestCode == 102) {
-//                // Обновление существующего
-//                dataBase.mainDAO().update(
-//                        newAddress.getAddress(),
-//                        newAddress.getComment(),
-//                        newAddress.getDate(),
-//                        newAddress.isChecked(),
-//                        newAddress.getId()
-//                );
-//            }
-//
-//            // Обновляем список
-//            addressList.clear();
-//            addressList.addAll(dataBase.mainDAO().getAll());
-//            addressListAdapter.notifyDataSetChanged();
-//        }
-//    }
 }
+
+
 

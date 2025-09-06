@@ -41,6 +41,13 @@ public class Address implements Serializable { //implements Serializable — п�
     @ColumnInfo(name = "checked")
     boolean checked = false;
 
+    // индекс в списке
+    @ColumnInfo(name = "position")
+    private int position;
+
+
+
+
     //3️⃣ Конструктор. Пустой конструктор нужен Room для создания объекта при загрузке из базы.
     public Address() {
     }
@@ -117,5 +124,13 @@ public class Address implements Serializable { //implements Serializable — п�
 
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

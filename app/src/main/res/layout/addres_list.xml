@@ -7,7 +7,8 @@
     app:cardBackgroundColor="@color/yellow"
     app:cardCornerRadius="8dp"
     android:layout_margin="8dp"
-    app:cardElevation="8dp">
+    app:cardElevation="8dp"
+>
 
 
     <LinearLayout
@@ -29,7 +30,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:paddingHorizontal="10dp"
-                android:paddingVertical="8dp"
+                android:paddingVertical="2dp"
                 android:layout_alignParentStart="true"
                 android:singleLine="true"
                 android:marqueeRepeatLimit="marquee_forever"
@@ -56,9 +57,9 @@
             android:text="Phone"
             android:textSize="14sp"
             android:paddingHorizontal="10dp"
-            android:paddingVertical="8dp"
+            android:paddingVertical="2dp"
             android:textColor="@color/black"
-            android:maxLines="5"/>
+            />
 
         <TextView
             android:id="@+id/text_comment"
@@ -67,9 +68,9 @@
             android:textSize="14sp"
             android:text="Comment"
             android:paddingHorizontal="10dp"
-            android:paddingVertical="8dp"
+            android:paddingVertical="2dp"
             android:textColor="@color/black"
-            android:maxLines="5"/>
+            />
 
         <TextView
             android:id="@+id/text_date"
@@ -78,7 +79,7 @@
             android:text="Date"
             android:textSize="14sp"
             android:paddingHorizontal="10dp"
-            android:paddingVertical="8dp"
+            android:paddingVertical="2dp"
             android:textColor="@color/black"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"

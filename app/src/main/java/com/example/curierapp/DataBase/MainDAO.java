@@ -17,12 +17,17 @@ import java.util.List;
 @Dao
 public interface MainDAO {
 
+    @Query("SELECT * FROM address WHERE id = :id")
+    Address getById(int id);
+
     //2️⃣ Добавление записи. Принимает Address — это наша модель адреса, скорее всего помеченная @Entity.
-    @Insert(onConflict = REPLACE) //onConflict = REPLACE — если в таблице уже есть запись с таким же id, она будет заменена (удобно для обновлений).
-    void insert (Address address); //@Insert — говорит Room: "Добавь этот объект в таблицу".
+    @Insert(onConflict = REPLACE)
+    //onConflict = REPLACE — если в таблице уже есть запись с таким же id, она будет заменена (удобно для обновлений).
+    void insert(Address address); //@Insert — говорит Room: "Добавь этот объект в таблицу".
 
     // 3️⃣ Получение всех записей
-    @Query("SELECT * FROM address ORDER BY checked, id DESC") //@Query — пишем обычный SQL-запрос. "SELECT * FROM address" — достаём все поля из таблицы address. "ORDER BY id DESC" — сортируем по id от большего к меньшему (новые записи сверху).
+    @Query("SELECT * FROM address ORDER BY checked, id ASC")
+    //@Query — пишем обычный SQL-запрос. "SELECT * FROM address" — достаём все поля из таблицы address. "ORDER BY id DESC" — сортируем по id от большего к меньшему (новые записи сверху).
     List<Address> getAll(); //Возвращаем список объектов Address.
 
 /*    // 4️⃣ Обновление записи
@@ -39,4 +44,8 @@ public interface MainDAO {
 
     @Query("UPDATE address SET checked = :checked WHERE ID = :id")
     void check(boolean checked, int id);
+
+// сортировка по перетаскиванию
+    @Query("SELECT * FROM address ORDER BY position ASC")
+    List<Address> getAllSorted();
 }

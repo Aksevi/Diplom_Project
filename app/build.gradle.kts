@@ -37,7 +37,8 @@ dependencies {
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
 
-    implementation(libs.mapkit)
+    implementation (libs.maps.mobile.v4190lite)
+
 
     implementation(libs.appcompat)
     implementation(libs.material)
