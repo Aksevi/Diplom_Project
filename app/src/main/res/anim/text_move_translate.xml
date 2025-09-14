@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--анимация движения текста по экрану-->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true">
+    <translate
+        android:duration="2500"
+        android:fromXDelta="-700"
+        android:toXDelta="200"
+        android:startOffset="700"
+        android:interpolator="@android:anim/linear_interpolator"
+        />
+</set>
+
+    <!--
+    fromXDelta="-500" → машинка стартует за левым краем экрана.
+
+    toXDelta="1200" → уезжает полностью за правый край.
+
+    android:startOffset="500"   задержка в мс
+
+    linear_interpolator → едет с постоянной скоростью.
+
+    fillAfter="true" → после анимации объект остаётся в конце.
+    -->

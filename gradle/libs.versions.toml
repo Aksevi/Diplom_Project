@@ -14,6 +14,8 @@ playServicesMaps = "19.2.0"
 recyclerviewSwipedecoratorVersion = "1.4"
 roomRuntime = "2.7.2"
 yandexMapsMobile = "4.5.1-lite"
+kotlin = "2.0.21"
+coreKtx = "1.17.0"
 
 [libraries]
 android-recyclerview-swipedecorator = { module = "it.xabaras.android:recyclerview-swipedecorator", version.ref = "recyclerviewSwipedecoratorVersion" }
@@ -34,7 +36,9 @@ play-services-location = { module = "com.google.android.gms:play-services-locati
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 

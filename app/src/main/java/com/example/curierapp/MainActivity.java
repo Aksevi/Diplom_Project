@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     Button btnMap;
     Button btnStatistics;
 
-
     private AddressListAdapter addressListAdapter; //адаптер, который будет соединять список данных и RecyclerView.
     RoomDB dataBase; // объект базы данных ROOM
     private List<Address> addressList = new ArrayList<>(); // список адресов, который мы получаем из базы.
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         btnStatistics = findViewById(R.id.btn_Statistics);
 
         dataBase = RoomDB.getInstance(this); //Подключаемся к базе данных.
-        addressList = dataBase.mainDAO().getAll(); //Загружаем все адреса из базы.
+        addressList = dataBase.mainDAO().getAllSorted(); //Загружаем все адреса из базы.  getAllSorted() получает отсортированные по позиции
 
 
         // Создаём адаптер и передаём:
@@ -78,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         // жмем кнопку карта
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +94,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Заново загружаем список из базы
+       List<Address> newList = dataBase.mainDAO().getAllSorted();
+        addressListAdapter.setList(newList); // теперь список будет перерисован
+
     }
 
     //Интерфейс обработки кликов. Это анонимная реализация интерфейса AddressClickListener. ее создаем чтобы работал метод private void updateRecycler(List<Address> address). Создавать лучше после того как в методе все прописали

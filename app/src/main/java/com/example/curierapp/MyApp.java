@@ -8,7 +8,7 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        MapKitFactory.setApiKey("0e45506f-71a8-4431-8d43-cc279925b01f");
+        MapKitFactory.setApiKey("my_apikey");
         MapKitFactory.initialize(this);
     }
 }

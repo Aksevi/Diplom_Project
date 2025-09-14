@@ -42,10 +42,17 @@ public interface MainDAO {
     @Delete
     void delete(Address address);
 
+    // 5️⃣ Удаление всех записей.
+    @Query("DELETE FROM address")
+    void deleteAll();
+
     @Query("UPDATE address SET checked = :checked WHERE ID = :id")
     void check(boolean checked, int id);
 
 // сортировка по перетаскиванию
-    @Query("SELECT * FROM address ORDER BY position ASC")
-    List<Address> getAllSorted();
+@Query("SELECT * FROM address ORDER BY checked ASC, position ASC")
+List<Address> getAllSorted();
+
+/*    @Query("SELECT * FROM address ORDER BY position ASC")
+    List<Address> getAllSorted();*/
 }

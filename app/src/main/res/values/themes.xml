@@ -6,14 +6,19 @@
     </style>
     <style name="Theme.CurierApp" parent="Base.Theme.CurierApp" />
 
-    <!--ПОДКЛЮЧАЕМ СТИЛЬ ДЛЯ АНИМАЦИИ которую создали для всплывающего диалога -->
-    <style name="floatingWindowDialogAnimation">
-        <item name="android:windowEnterAnimation">
-            @anim/address_dialog_up
-        </item>
-
-        <item name="android:windowExitAnimation">
-            @anim/address_dialog_down
-        </item>
+    <style name="ActionBarThemeOverlay" parent="ThemeOverlay.AppCompat.ActionBar">>
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="colorControlNormal">@color/white</item>
     </style>
+
+    <!--ПОДКЛЮЧАЕМ СТИЛЬ ДЛЯ АНИМАЦИИ которую создали для всплывающего диалога -->
+<!--    <style name="floatingWindowDialogAnimation">-->
+<!--        <item name="android:windowEnterAnimation">-->
+<!--            @anim/address_dialog_up-->
+<!--        </item>-->
+
+<!--        <item name="android:windowExitAnimation">-->
+<!--            @anim/address_dialog_down-->
+<!--        </item>-->
+<!--    </style>-->
 </resources>

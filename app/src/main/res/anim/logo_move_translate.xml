@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--анимация движения лого по экрану-->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true">
+    <translate
+        android:duration="3000"
+        android:fromXDelta="-500"
+        android:toXDelta="1200"
+        android:interpolator="@android:anim/linear_interpolator"
+        />
+</set>
+
+<!--
+fromXDelta="-500" → машинка стартует за левым краем экрана.
+
+toXDelta="1200" → уезжает полностью за правый край.
+
+linear_interpolator → едет с постоянной скоростью.
+
+fillAfter="true" → после анимации объект остаётся в конце.
+-->

@@ -8,10 +8,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.curierapp.Models.Address;
+import com.example.curierapp.Models.Statistics;
 
-    //RoomDB — это класс, который создаёт и настраивает базу данных. Он следит, чтобы в приложении была только одна база и отдаёт тебе MainDAO, через который ты работаешь с таблицей Address.
+//RoomDB — это класс, который создаёт и настраивает базу данных. Он следит, чтобы в приложении была только одна база и отдаёт тебе MainDAO, через который ты работаешь с таблицей Address.
     //1️⃣ Аннотация @Database для Room, чтобы понять, какие таблицы включить в БД. entities = Address.class — указываем, что в базе будет одна таблица — Address. version = 1 — это версия базы, пригодится при миграциях (например, если ты позже добавишь новое поле в таблицу). exportSchema = false — отключает экспорт схемы базы как файла (вполне нормально для небольших проектов).
-@Database(entities = {Address.class}, version = 2, exportSchema = false)
+@Database(entities = {Address.class, Statistics.class}, version = 3, exportSchema = false)
     //2️⃣ Наследование от RoomDatabase. RoomDatabase — это абстрактный класс из библиотеки Room.
 public abstract class RoomDB extends RoomDatabase {
 
@@ -30,4 +31,9 @@ public abstract class RoomDB extends RoomDatabase {
     }
     //5️⃣ Доступ к DAO абстрактный метод, который говорит Room: Эй, когда я попрошу DAO — верни мне реализацию MainDAO, связанную с таблицей Address.” Room сам сгенерирует  нужный код при компиляции.
     public abstract MainDAO mainDAO();
+
+    public abstract StatisticsDAO statisticsDao(); // добавил  для таблицы  статистики.
+
 }
+
+

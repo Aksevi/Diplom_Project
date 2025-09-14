@@ -98,7 +98,7 @@ public class TouchHelper extends ItemTouchHelper.SimpleCallback {
             dialog.show();
 
         } else { //Если свайп был в левую сторону
-            final Address addressToCheck = adapter.getList().get(position); //final используется, потому что мы будем использовать эту переменную внутри вложенного потока (new Thread()). Мы берём конкретный объект Address с именем addressToCheck, который нужно отметить/снять отметку. adapter.getList() — это список всех адресов, который используется в RecyclerView. position — это позиция элемента, на который сделали свайп
+            final Address addressToCheck = adapter.getList().get(position); //final используется, потому что  буду использовать эту переменную внутри вложенного потока (new Thread()).  беру конкретный объект Address с именем addressToCheck, который нужно отметить/снять отметку. adapter.getList() — это список всех адресов, который используется в RecyclerView. position — это позиция элемента, на который сделали свайп
 
             // переключаем значение isChecked
             addressToCheck.setChecked(!addressToCheck.isChecked()); // Переключаем значение флага isChecked. ! — это оператор логического отрицания, он инвертирует true/false.

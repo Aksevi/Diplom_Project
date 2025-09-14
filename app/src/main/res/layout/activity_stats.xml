@@ -2,10 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/black">
+    android:background="@color/colorPrimary">
+
+    <!-- Кнопка сбросить статистику  -->
+    <Button
+        android:id="@+id/btn_statistics_clear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Очистить статистику"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"/>
 
     <!-- Заголовок -->
     <TextView
@@ -19,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         />
 
     <!-- Всего адресов -->
@@ -77,6 +89,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"/>
+
+    <!-- Статистика за месяц -->
+    <TextView
+        android:id="@+id/text_statistics"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="За месяц: "
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_bar"
+        android:layout_marginTop="50dp"/>
+
+    <!-- Среднее в день -->
+    <TextView
+        android:id="@+id/text_per_day"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Среднее в день: "
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_statistics"
+        android:layout_marginTop="30dp"/>
+
+    <!-- Кнопка закрыть смену  -->
+    <Button
+        android:id="@+id/btn_close_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Закрыть смену"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_per_day"
+        android:layout_marginTop="50dp"/>
 
     <!-- Кнопка назад -->
     <Button

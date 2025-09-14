@@ -12,7 +12,8 @@ public class Address implements Serializable { //implements Serializable — п�
 
     //2️⃣ Поля — это колонки в таблице
     //Первичный ключ
-    @PrimaryKey(autoGenerate = true)// @PrimaryKey(autoGenerate = true) — ключ будет уникальным и генерироваться автоматически.
+    @PrimaryKey(autoGenerate = true)
+// @PrimaryKey(autoGenerate = true) — ключ будет уникальным и генерироваться автоматически.
     @ColumnInfo(name = "id") //@ColumnInfo(name = "id") — имя колонки в базе.
     private int id = 0;
     //Адрес
@@ -44,8 +45,6 @@ public class Address implements Serializable { //implements Serializable — п�
     // индекс в списке
     @ColumnInfo(name = "position")
     private int position;
-
-
 
 
     //3️⃣ Конструктор. Пустой конструктор нужен Room для создания объекта при загрузке из базы.
@@ -134,3 +133,5 @@ public class Address implements Serializable { //implements Serializable — п�
         this.position = position;
     }
 }
+
+
